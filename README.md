@@ -4,7 +4,8 @@
 
 ---
 
-## Flow Explanation
+## Flow Explanation:
+
 	1.	Collect JS resources: First, the extension scans all the JavaScript resources loaded on the page via the Network tab.
 	2.	Make requests: It sends requests to fetch the content of each JS file.
 	3.	Extract comments: Using regular expressions, it parses the fetched content and extracts all commented code blocks.
