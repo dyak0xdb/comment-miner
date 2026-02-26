@@ -1,6 +1,6 @@
 # Comment Miner
 
-**Comment Miner** is a Chrome extension that extracts code snippets and commented code blocks from web page resources. Easily collect, organize, and export code for analysis or reuse.
+**Comment Miner** is a Chrome extension that extracts code snippets and commented code blocks from web resources. Easily collect, organize, and export code for analysis or reuse.
 
 ---
 
