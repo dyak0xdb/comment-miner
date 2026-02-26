@@ -1,0 +1,220 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comment Miner</title>
+
+  <style>:root {
+  --bg-main: #0e0e0e;
+  --bg-panel: #151515;
+  --bg-card: #1b1b1b;
+  --bg-hover: #232323;
+
+  --border: #2a2a2a;
+
+  --text-main: #f2f2f2;
+  --text-muted: #a0a0a0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 420px;
+  height: 520px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+/* ───────── Toolbar ───────── */
+
+.toolbar {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.toolbar button {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--bg-hover);
+  color: var(--text-main);
+}
+
+.toolbar button.active {
+  background: var(--bg-hover);
+  color: white;
+  border-color: #3a3a3a;
+}
+
+
+.output {
+  height: calc(100% - 54px);
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.file {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.file-meta {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2f80ff;        
+  cursor: pointer;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  position: relative;
+}
+
+/* نمایش لینک کامل روی هاور */
+.file-meta:hover::after {
+  content: attr(data-full);
+  position: absolute;
+  left: 0;
+  top: 110%;
+
+  background: #000;
+  color: #5da9ff;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  font-size: 11px;
+  white-space: normal;
+  max-width: 380px;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,.6);
+  z-index: 999;
+}
+
+
+/* tooltip لینک کامل */
+.file-meta::after {
+  content: attr(data-full);
+  position: absolute;
+  left: 12px;
+  top: 100%;
+  margin-top: 6px;
+  background: #000;
+  color: #fff;
+  font-size: 11px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  white-space: normal;
+  max-width: 380px;
+  word-break: break-all;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+  z-index: 999;
+}
+
+.file-meta:hover::after {
+  opacity: 1;
+  text-decoration: underline;
+
+}
+
+/* ───────── Comment ───────── */
+
+.comment {
+    position: relative;
+  margin: 8px 10px;
+  padding: 10px 12px;
+  background: #202020;
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e0e0e0;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 34px;
+
+  transition: background .2s ease;
+   transition:
+    background .2s ease,
+    max-height .35s ease,
+    box-shadow .2s ease;
+}
+
+.comment:hover {
+  background: #2a2a2a;
+  box-shadow: inset 0 0 0 1px #3a3a3a;
+}
+.comment::after {
+  content: "click to expand";
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  font-size: 10px;
+  color: #777;
+  opacity: 0;
+  transition: .2s ease;
+}
+
+.comment:hover::after {
+  opacity: 1;
+}
+
+
+.comment.open {
+  white-space: normal;
+  max-height: 400px;
+  background: #262626;
+  color: #fff;
+}
+
+/* ───────── Scrollbar ───────── */
+
+.output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.output::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 10px;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <div class="toolbar">
+    <button data-view="comment" >Comment</button>
+  </div>
+
+  <div class="output" id="output">
+    Select a section…
+  </div>
+
+  <script src="ui.js"></script>
+</body>
+</html>
